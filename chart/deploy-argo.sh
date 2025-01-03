@@ -32,5 +32,5 @@ if [ $? -eq 0 ]; then
   exit
 fi
 
-kubectl create ns $NAMESPACE
+kubectl create ns $NAMESPACE || true
 argocd app create roboshop-${APP_NAME} --project default --sync-policy auto --repo https://github.com/b58-clouddevops/roboshop-helmcharts --path chart --dest-namespace ${NAMESPACE} --dest-server https://kubernetes.default.svc --values ../env-${ENV}/${APP_NAME}.yaml
