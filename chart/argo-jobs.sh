@@ -1,23 +1,36 @@
-echo "Authenticaing to EKS ${1}"
-aws eks update-kubeconfig --name ${1}-eks
-kubectl get nodes 
-
-ARGO_URL="argocd.cloudapps.today"
-ARGO_PWD=$(kubectl get secret argocd-initial-admin-secret -o json -n argocd | jq '.data.password'| xargs | base64 -d)
-argocd login $ARGO_URL  --username admin --password $ARGO_PWD --grpc-web
-
-pwd
-
-argocd app list |grep "argocd/${2}"
-if [ $? -ne 0 ]; then
-    echo "creating ${1} ${2} app"
-    argocd app create ${2} --repo https://github.com/B58-CloudDevOps/roboshop-helmcharts.git --path . --dest-namespace default --dest-server https://kubernetes.default.svc --values ../env-${1}/${2}.yaml --sync-policy auto  --helm-set imageTag=${3} #--grpc-web
-    argocd app wait ${2}
+#!/bin/bash
+if [ -z "$1" ]; then
+  echo APP_NAME input is missing
+  echo Usage: $0 APP_NAME ENV NAMESPACE
+  exit 1
+else
+  APP_NAME=$1
 fi
 
-echo "Deployment of ${2} ${3} version to ${1} eks cluster" 
-argocd app set ${2} --parameter imageTag=${3}
+if [ -z "$2" ]; then
+  echo ENV input is missing
+  echo Usage: $0 APP_NAME ENV NAMESPACE
+  exit 1
+else
+  ENV=$2
+fi
 
-echo "Deployment of version ${3} is completed"
-argocd app wait ${2}
-kubectl get pods | grep ${2}
+if [ -z "$3" ]; then
+  echo NAMESPACE input is missing
+  echo Usage: $0 APP_NAME ENV NAMESPACE
+  exit 1
+else
+  NAMESPACE=$3
+fi
+
+ARGOCD_PASSWORD=$(kubectl get secrets argocd-initial-admin-secret -n argocd  -o=jsonpath='{.data.password}' | base64 --decode)
+argocd login  argocd.cloudapps.today:443 --grpc-web --username admin --password ${ARGOCD_PASSWORD}
+
+argocd app list | grep argocd/$APP_NAME &>/dev/null
+if [ $? -eq 0 ]; then
+  argocd app sync ${APP_NAME}
+  exit
+fi
+
+kubectl create ns $NAMESPACE
+argocd app create roboshop-${APP_NAME} --project default --sync-policy auto --repo https://github.com/raghudevopsb79/roboshop-helm --path chart --dest-namespace ${NAMESPACE} --dest-server https://kubernetes.default.svc --values ../env-${ENV}/${APP_NAME}.yaml
