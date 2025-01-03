@@ -17,8 +17,5 @@ spec:
       containers:
       - name: {{ .Values.name }}
         image: {{ .Values.image }}
-        envFrom:
-        - configMapRef:
-            name: {{ .Values.name }}
         ports:
         - containerPort: {{ .Values.containerPort }}
