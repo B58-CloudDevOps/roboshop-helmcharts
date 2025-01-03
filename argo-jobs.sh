@@ -6,6 +6,8 @@ ARGO_URL="argocd.cloudapps.today"
 ARGO_PWD=$(kubectl get secret argocd-initial-admin-secret -o json -n argocd | jq '.data.password'| xargs | base64 -d)
 argocd login $ARGO_URL  --username admin --password $ARGO_PWD
 
+pwd
+
 argocd app list |grep "argocd/${2}"
 if [ $? -ne 0 ]; then
     echo "creating ${1} ${2} app"
