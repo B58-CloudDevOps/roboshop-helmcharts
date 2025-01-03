@@ -33,4 +33,4 @@ if [ $? -eq 0 ]; then
 fi
 
 kubectl create ns $NAMESPACE
-argocd app create roboshop-${APP_NAME} --project default --sync-policy auto --repo https://github.com/raghudevopsb79/roboshop-helm --path chart --dest-namespace ${NAMESPACE} --dest-server https://kubernetes.default.svc --values ../env-${ENV}/${APP_NAME}.yaml
+argocd app create roboshop-${APP_NAME} --project default --sync-policy auto --repo https://github.com/b58-clouddevops/roboshop-helmcharts --path chart --dest-namespace ${NAMESPACE} --dest-server https://kubernetes.default.svc --values ../env-${ENV}/${APP_NAME}.yaml
