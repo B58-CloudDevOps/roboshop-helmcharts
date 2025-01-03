@@ -3,7 +3,7 @@ aws eks update-kubeconfig --name ${1}-eks
 kubectl get nodes 
 
 ARGO_URL="argocd.cloudapps.today"
-ARGO_PWD=$(kubectl get secret argocd-initial-admin-secret -n argocd-initial-admin-secret -o json -n argocd | jq '.data.password'| xargs | base64 -d)
+ARGO_PWD=$(kubectl get secret argocd-initial-admin-secret -o json -n argocd | jq '.data.password'| xargs | base64 -d)
 argocd login $ARGO_URL  --username admin --password $ARGO_PWD
 
 argocd app list |grep "argocd/${2}"
