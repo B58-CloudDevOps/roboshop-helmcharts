@@ -1,0 +1,24 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+    name: "{{ .Values.name }}-role"
+    namesapce: "{{ .Values.namespace }}"
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["create", "update", "list", "get", "delete", "watch"]
+
+--- 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+    name: "{{ .Values.name }}-roleb-inding"
+    namespace: "{{ .Values.namespace }}"
+subjects:
+- kind: ServiceAccount
+    name: "{{ .Values.name }}"
+    namespace: "{{ .Values.namespace }}"
+roleRef:
+    kind: Role
+    name: "{{ .Values.name }}-role"
+    apiGroup: rbac.authorization.k8s.io
