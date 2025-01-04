@@ -6,7 +6,7 @@ metadata:
 rules:
 - apiGroups: [""] # "" indicates the core API group
   resources: ["secrets"]
-  verbs: ["create", "update", "list", "get", "delete", "watch"]
+  verbs: ["get", "watch", "list", "create", "update", "delete"]
 
 --- 
 apiVersion: rbac.authorization.k8s.io/v1
