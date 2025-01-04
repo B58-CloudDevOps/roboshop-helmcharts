@@ -18,6 +18,9 @@ spec:
       - name: config-init-from-vault
         image: 355449129696.dkr.ecr.us-east-1.amazonaws.com/config-init-from-vault:latest
         imagePullPolicy: Always
+        envFrom: 
+          - secretRef: 
+              name: vault                      # This is the only manual secret we provision.
       containers:
       - name: {{ .Values.name }}
         image: {{ .Values.image }}
