@@ -4,7 +4,7 @@ metadata:
   namespace: {{ .Values.namespace }}
   name: {{ .Values.name }}-role
 rules:
-- apiGroups: [""] # "" indicates the core API group
+- apiGroups: [""] 
   resources: ["secrets"]
   verbs: ["get", "watch", "list", "create", "update", "delete"]
 
