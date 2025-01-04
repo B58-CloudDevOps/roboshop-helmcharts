@@ -2,18 +2,17 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
     name: {{ .Values.name }}-role
-    namesapce: {{ .Values.namespace }}
+    namespace: {{ .Values.namespace }}
 rules:
 - apiGroups: [""]
-  resources: 
-    - secrets
   verbs: ["create", "update", "list", "get", "delete", "watch"]
+  resources: ["secrets"]
 
 --- 
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-    name: "{{ .Values.name }}-roleb-inding"
+    name: "{{ .Values.name }}-role-binding"
     namespace: "{{ .Values.namespace }}"
 subjects:
 - kind: ServiceAccount
