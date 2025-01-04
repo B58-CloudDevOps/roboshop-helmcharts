@@ -5,7 +5,8 @@ metadata:
     namesapce: {{ .Values.namespace }}
 rules:
 - apiGroups: [""]
-  resources: ["secrets"]
+  resources: 
+    - secrets
   verbs: ["create", "update", "list", "get", "delete", "watch"]
 
 --- 
