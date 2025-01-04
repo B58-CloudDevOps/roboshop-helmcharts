@@ -1,7 +1,7 @@
 name: frontend
 image: public.ecr.aws/w2x3d9u7/roboshop-v3/frontend:latest
 containerPort: 80
-replicas: 3
+replicas: 1
 labels: 
   appName: frontend 
   env: dev
