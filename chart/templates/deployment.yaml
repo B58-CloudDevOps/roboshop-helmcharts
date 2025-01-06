@@ -33,3 +33,6 @@ spec:
         image: {{ .Values.image }}
         ports:
         - containerPort: {{ .Values.containerPort }}
+        envFrom: 
+          - secretRef: 
+              name: {{ .Values.name }}
