@@ -5,5 +5,5 @@ replicas: 1
 labels: 
   appName: frontend 
   env: dev
-namespace: default
+namespace: web
 environment: dev

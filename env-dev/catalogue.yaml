@@ -1,0 +1,9 @@
+name: catalogue
+image: public.ecr.aws/w2x3d9u7/roboshop-v3/catalogue:latest
+containerPort: 8080
+replicas: 1
+labels: 
+  appName: catalogue 
+  env: dev
+namespace: app
+environment: dev

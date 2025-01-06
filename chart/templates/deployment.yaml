@@ -37,5 +37,5 @@ spec:
         envFrom: 
           - secretRef: 
               name: {{ .Values.name }}
-        command: ["tail", "-f", "/dev/null"]
+        # command: ["tail", "-f", "/dev/null"]  # Enable this when you need to troubleshoot the container.
         
