@@ -31,8 +31,11 @@ spec:
       containers:
       - name: {{ .Values.name }}
         image: {{ .Values.image }}
+        imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.containerPort }}
         envFrom: 
           - secretRef: 
               name: {{ .Values.name }}
+        command: ["tail", "-f", "/dev/null"]
+        
