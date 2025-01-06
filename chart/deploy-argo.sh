@@ -24,7 +24,7 @@ else
 fi
 
 ARGOCD_PASSWORD=$(kubectl get secrets argocd-initial-admin-secret -n argocd  -o=jsonpath='{.data.password}' | base64 --decode)
-argocd login  argocd-${ENV}.cloudapps.today:443 --grpc-web --username admin --password ${ARGOCD_PASSWORD}
+argocd login  argocd.cloudapps.today:443 --grpc-web --username admin --password ${ARGOCD_PASSWORD}
 
 argocd app list | grep argocd/$APP_NAME &>/dev/null
 if [ $? -eq 0 ]; then
