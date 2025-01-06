@@ -22,7 +22,7 @@ spec:
         imagePullPolicy: Always
         env:
           - name: ENV 
-            values: {{ .Values.env }}
+            values: {{ .Values.environment }}
           - name: APP_NAME
             values: {{ .Values.name }}          
         envFrom: 

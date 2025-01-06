@@ -6,4 +6,4 @@ labels:
   appName: frontend 
   env: dev
 namespace: default
-env: dev
+environment: dev
