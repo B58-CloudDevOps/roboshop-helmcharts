@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   selector:
-    {{ toYaml .Values.labels | indent 4 }}
+{{- toYaml .Values.labels | nindent 4 }}
   ports:
   - name: app
     protocol: TCP
