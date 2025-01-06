@@ -1,0 +1,9 @@
+name: payment
+image: public.ecr.aws/w2x3d9u7/roboshop-v3/payment:latest
+containerPort: 8080
+replicas: 1
+labels: 
+  appName: payment 
+  env: dev
+namespace: app
+environment: dev
