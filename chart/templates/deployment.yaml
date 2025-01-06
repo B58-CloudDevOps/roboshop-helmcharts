@@ -22,9 +22,9 @@ spec:
         imagePullPolicy: Always
         env:
           - name: APP_NAME
-            values: "{{ .Values.name }}"
+            value: {{ .Values.name }}
           - name: ENVIRONMENT
-            values: "{{ .Values.environment }}" #{{ .Values.environment }}
+            value: {{ .Values.environment }}
         envFrom: 
           - secretRef: 
               name: vault                      # This is the only manual secret we provision.
