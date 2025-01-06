@@ -23,7 +23,7 @@ spec:
         env:
           - name: APP_NAME
             values: {{ .Values.name }}  
-          - name: ENV
+          - name: ENVIRONMENT
             values: {{ .Values.environment }}
         envFrom: 
           - secretRef: 
