@@ -3,6 +3,8 @@ kind: Role
 metadata:
   name: {{ .Values.name }}-role
   namespace: {{ .Values.namespace }}
+  annotations:
+    "helm.sh/hook": "pre-install"
 rules:
 - apiGroups: [""]
   resources: ["secrets"]
@@ -13,6 +15,8 @@ kind: RoleBinding
 metadata:
   name: {{ .Values.name }}-role-binding
   namespace: {{ .Values.namespace }}
+  annotations:
+    "helm.sh/hook": "pre-install"
 subjects:
 - kind: ServiceAccount
   name: {{ .Values.name }}

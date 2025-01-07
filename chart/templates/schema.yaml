@@ -5,6 +5,8 @@ kind: Job
 metadata:
   name: {{ .Values.name }}-schema-load
   namespace: {{ .Values.namespace }}
+  annotations:
+    "helm.sh/hook": "pre-install"
 spec:
   template:
     spec:
