@@ -32,5 +32,5 @@ spec:
             value: {{ $.Values.schema.schemaFiles }}
         envFrom: 
           - secretRef: 
-              name: {{ .Values.name }}
+              name: {{ $.Values.name }}
 {{ end }}
