@@ -9,3 +9,4 @@ namespace: web
 environment: dev
 ingress: 
   enabled: true 
+dns_name: frontend-dev.cloudapps.today
