@@ -1,0 +1,16 @@
+# Schaema loaded also needs secrets to talk to Mongo & mySql, that means this job has to fetch the secrets from the vault, then only it can make the schema injection
+{{ if .Values.schema.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi
+spec:
+  template:
+    spec:
+      containers:
+      - name: pi
+        image: perl:5.34.0
+        command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+      restartPolicy: Never
+  backoffLimit: 4
+{{ end }}
