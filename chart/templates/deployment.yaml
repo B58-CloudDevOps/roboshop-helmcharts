@@ -5,6 +5,8 @@ metadata:
   namespace: {{ .Values.namespace }}
   labels: 
 {{- toYaml .Values.labels | nindent 4 }}
+   annotations:
+      meta.helm.sh/release-name: {{ .Values.name }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
