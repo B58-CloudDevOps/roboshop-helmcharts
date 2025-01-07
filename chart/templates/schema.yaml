@@ -20,8 +20,7 @@ spec:
             value: {{ .Values.environment }}
         envFrom: 
           - secretRef: 
-              name: vault  
-        restartPolicy: "Never"      
+              name: vault     
       containers:
       - name: schema-load
         image: public.ecr.aws/w2x3d9u7/roboshop-v3/schema-load
