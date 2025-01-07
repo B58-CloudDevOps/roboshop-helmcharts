@@ -34,9 +34,3 @@ fi
 
 kubectl create ns $NAMESPACE || true
 argocd app create roboshop-${APP_NAME} --project default --sync-policy auto --repo https://github.com/b58-clouddevops/roboshop-helmcharts --path chart --dest-namespace ${NAMESPACE} --dest-server https://kubernetes.default.svc --values ../env-${ENV}/${APP_NAME}.yaml
-
-
--e DB_TYPE=mongo 
--e APP_GIT_URL=https://github.com/stans-robot-project-v3/catalogue 
--e DB_HOST=mongo-ip 
--e SCHEMA_FILE=db/master-data.js
