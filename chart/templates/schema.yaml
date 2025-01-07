@@ -21,11 +21,11 @@ spec:
         envFrom: 
           - secretRef: 
               name: vault  
+        restartPolicy: Never          
       containers:
       - name: schema-load
         image: public.ecr.aws/w2x3d9u7/roboshop-v3/schema-load
         envFrom: 
           - secretRef: 
               name: {{ .Values.name }}
-        restartPolicy: Never
 {{ end }}
