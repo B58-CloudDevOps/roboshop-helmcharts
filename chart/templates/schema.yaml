@@ -1,4 +1,5 @@
-# Schaema loaded also needs secrets to talk to Mongo & mySql, that means this job has to fetch the secrets from the vault, then only it can make the schema injection
+# Schaema loaded also needs secrets to talk to MongoDB
+# As MySQL Schema Injection Takes time we kept this out of schema jobs
 {{ if .Values.schema.enabled }}
 apiVersion: batch/v1
 kind: Job

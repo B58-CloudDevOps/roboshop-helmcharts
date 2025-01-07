@@ -7,6 +7,4 @@ labels:
   env: dev
 namespace: app
 environment: dev
-schema: 
-  enabled: true
-  schemaFiles: "app-user schema master-data"
+
