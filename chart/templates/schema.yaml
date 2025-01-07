@@ -3,14 +3,28 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: pi
+  name: {{ .Values.name }}-schema-load
+  namespace: {{ .Values.namespace }}
 spec:
   template:
     spec:
+      serviceAccountName: {{ .Values.name }}
+      initContainers:
+      - name: config-init-from-vault
+        image: 355449129696.dkr.ecr.us-east-1.amazonaws.com/config-init-from-vault:latest
+        imagePullPolicy: Always
+        env:
+          - name: APP_NAME
+            value: {{ .Values.name }}
+          - name: ENVIRONMENT
+            value: {{ .Values.environment }}
+        envFrom: 
+          - secretRef: 
+              name: vault  
       containers:
-      - name: pi
-        image: perl:5.34.0
-        command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
-      restartPolicy: Never
-  backoffLimit: 4
+      - name: schema-load
+        image: public.ecr.aws/w2x3d9u7/roboshop-v3/schema-load
+        envFrom: 
+          - secretRef: 
+              name: {{ .Values.name }}
 {{ end }}
