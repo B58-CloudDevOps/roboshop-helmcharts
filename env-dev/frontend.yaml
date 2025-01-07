@@ -7,3 +7,5 @@ labels:
   env: dev
 namespace: web
 environment: dev
+ingress: 
+  enabled: true 
