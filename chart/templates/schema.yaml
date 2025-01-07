@@ -29,35 +29,3 @@ spec:
               name: {{ .Values.name }}
         restartPolicy: Never
 {{ end }}
---- 
-apiVersion: batch/v1
-kind: Job
-metadata:
-  labels:
-    app.kubernetes.io/instance: roboshop-catalogue
-  name: catalogue-schema-load
-  namespace: app
-spec:
-  template:
-    spec:
-      containers:
-        - envFrom:
-            - secretRef:
-                name: catalogue
-          image: public.ecr.aws/w2x3d9u7/roboshop-v3/schema-load
-          name: schema-load
-      restartPolicy: Never
-      initContainers:
-        - env:
-            - name: APP_NAME
-              value: catalogue
-            - name: ENVIRONMENT
-              value: dev
-          envFrom:
-            - secretRef:
-                name: vault
-          image: >-
-            355449129696.dkr.ecr.us-east-1.amazonaws.com/config-init-from-vault:latest
-          imagePullPolicy: Always
-          name: config-init-from-vault
-      serviceAccountName: catalogue
