@@ -37,6 +37,18 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.containerPort }}
+        livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.containerPort }}
+            initialDelaySeconds: 5
+            periodSeconds: 5
+        readinessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.containerPort }}
+            initialDelaySeconds: 5
+            periodSeconds: 5
         envFrom: 
           - secretRef: 
               name: {{ .Values.name }}
