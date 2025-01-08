@@ -7,3 +7,10 @@ labels:
   env: dev
 namespace: app
 environment: dev
+resources:
+  requests:
+      memory: "150Mi"
+      cpu: "50m"
+  limits:
+      memory: "150Mi"
+      cpu: "200m"

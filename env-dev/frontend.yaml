@@ -10,3 +10,10 @@ environment: dev
 ingress: 
   enabled: true 
 dns_name: frontend-dev.cloudapps.today
+resources:
+  requests:
+      memory: "150Mi"
+      cpu: "50m"
+  limits:
+      memory: "150Mi"
+      cpu: "200m"
