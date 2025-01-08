@@ -8,8 +8,8 @@ labels:
 namespace: web
 environment: dev
 ingress: 
-  enabled: true 
-dns_name: frontend-dev.cloudapps.today
+  enabled: true
+  dns_name: frontend-dev.cloudapps.today
 resources:
   requests:
       memory: "150Mi"
